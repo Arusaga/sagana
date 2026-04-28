@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>புதுமனை புகுவிழா அழைப்பிதழ் - சஹானா இல்லம்</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Arima:wght@400;700&display=swap');
+        
+        body {
+            background-color: #1a1a1a;
+            color: #f3e5ab;
+            font-family: 'Arima', cursive, serif;
+            overflow-x: hidden;
+            background: linear-gradient(rgba(26, 26, 26, 0.95), rgba(26, 26, 26, 0.95)), 
+                        url('https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=60&w=1200');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .gold-text {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .glass-panel {
+            background: rgba(45, 27, 13, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(191, 149, 63, 0.3);
+            border-radius: 2rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .petal {
+            position: fixed;
+            top: -10%;
+            user-select: none;
+            pointer-events: none;
+            z-index: 50;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        .building-frame {
+            border: 8px solid;
+            border-image: linear-gradient(to bottom, #bf953f, #fcf6ba, #b38728) 1;
+            box-shadow: 0 0 40px rgba(191, 149, 63, 0.3);
+            transition: transform 0.5s ease;
+        }
+        
+        .building-frame:hover {
+            transform: scale(1.02);
+        }
+
+        .button-gold {
+            background: linear-gradient(45deg, #bf953f, #fcf6ba);
+            color: #2d1b0d;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .button-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(191, 149, 63, 0.5);
+        }
+
+        .poem-box {
+            font-style: italic;
+            line-height: 1.8;
+            color: #fcf6ba;
+            border-left: 3px solid #bf953f;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .family-sign {
+            background: #3d2b1f;
+            border: 2px solid #bf953f;
+            padding: 1rem;
+            transform: rotate(-1deg);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+        }
+
+        /* Sound Wave Animation */
+        .wave-container {
+            display: none;
+            align-items: flex-end;
+            gap: 3px;
+            height: 30px;
+        }
+        .wave-bar {
+            width: 4px;
+            background: #bf953f;
+            border-radius: 2px;
+            animation: wave 1s ease-in-out infinite;
+        }
+        @keyframes wave {
+            0%, 100% { height: 5px; }
+            50% { height: 25px; }
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center min-h-screen p-4 md:p-12">
+
+    <!-- Background Petals -->
+    <div id="petal-container"></div>
+
+    <!-- Header Section -->
+    <header class="text-center mb-12 animate__animated animate__fadeInDown">
+        <div class="flex justify-center gap-4 mb-4">
+            <span class="text-3xl">🪔</span>
+            <h2 class="text-xl md:text-2xl opacity-90">இறை அருளால் நடைபெறும்</h2>
+            <span class="text-3xl">🪔</span>
+        </div>
+        <h1 class="text-5xl md:text-7xl gold-text mb-4">புதுமனை புகுவிழா</h1>
+        <p class="text-2xl md:text-3xl text-yellow-100 font-bold tracking-widest">“சஹானா இல்லம்”</p>
+    </header>
+
+    <!-- Content Grid -->
+    <main class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        
+        <!-- Building Photo Section -->
+        <div class="space-y-8 animate__animated animate__fadeInLeft">
+            <div class="building-frame rounded-lg overflow-hidden bg-black relative group">
+                <img id="building-photo" src="home.jpeg" 
+                     class="w-full h-auto object-cover" alt="Sagana Grha Building">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                    <p class="text-white font-bold text-xl">எங்கள் கனவு இல்லம்</p>
+                </div>
+            </div>
+
+            <!-- The Poem from the Card -->
+            <div class="poem-box bg-black/40 p-6 rounded-r-xl">
+                <p class="text-lg">
+                    "குச்சியும் கனவும் சேர்த்துக் கூடு கட்டும் சிறுபறவைபோல்,<br>
+                    உழைப்பும் அன்பும் சேர்ந்து உயிர் தங்கும் இல்லம் இது."
+                </p>
+                <p class="mt-4 text-sm opacity-80">— அன்பே வீடு, அமைதியே கூடு.</p>
+            </div>
+            
+            <div class="flex flex-col items-center gap-4">
+                <div id="sound-wave" class="wave-container">
+                    <div class="wave-bar" style="animation-delay: 0.1s"></div>
+                    <div class="wave-bar" style="animation-delay: 0.3s"></div>
+                    <div class="wave-bar" style="animation-delay: 0.2s"></div>
+                    <div class="wave-bar" style="animation-delay: 0.4s"></div>
+                    <div class="wave-bar" style="animation-delay: 0.1s"></div>
+                </div>
+                <button id="music-toggle" class="button-gold px-10 py-4 rounded-full font-bold text-xl flex items-center gap-3">
+                    <span id="music-icon">▶</span> பாடலைப் கேளுங்கள்
+                </button>
+                <p class="text-xs text-yellow-200/60 italic">Musical Invitation: சஹானா இல்லம்</p>
+                
+                <audio id="bg-music" loop>
+                    <source src="சஹானா_இல்லம்.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+
+        <!-- Invitation Details Section -->
+        <div class="glass-panel p-8 md:p-12 space-y-8 animate__animated animate__fadeInRight">
+            <div class="text-center">
+                <p class="text-yellow-100 mb-2">அன்பும் மகிழ்ச்சியும் நிறைந்த எங்கள் இல்ல விழாவில்...</p>
+                <h3 class="text-3xl gold-text mb-4">கிரகப்பிரவேச அழைப்பிதழ்</h3>
+                <div class="h-1 w-32 bg-gradient-to-r from-transparent via-[#bf953f] to-transparent mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6 text-lg">
+                <div class="flex items-center gap-6 bg-white/5 p-4 rounded-xl border border-white/10">
+                    <span class="text-4xl">📅</span>
+                    <div>
+                        <p class="font-bold text-2xl gold-text">04-06-2026</p>
+                        <p class="text-sm opacity-90 italic">பராபவ வருடம் வைகாசி மாதம் 21-ஆம் தேதி</p>
+                        <p class="text-sm opacity-70 italic font-bold">வியாழக்கிழமை (Thursday)</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6 bg-white/5 p-4 rounded-xl border border-white/10">
+                    <span class="text-4xl">🕰️</span>
+                    <div>
+                        <p class="font-bold text-2xl">காலை 4.30 - 6.00</p>
+                        <p class="text-sm opacity-90">நல்ல நேரம் (Auspicious Time)</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-6 bg-white/5 p-4 rounded-xl border border-white/10">
+                    <span class="text-4xl">🏡</span>
+                    <div class="flex-1">
+                        <p class="font-bold text-xl gold-text uppercase">SAGANA GRHA</p>
+                        <p class="text-base leading-relaxed opacity-90">
+                            S.No: 129/13, Plot No: 37,<br>
+                            Krishnan Nagar Part 3, Varatharajapuram,<br>
+                            Chennai - 600 048.
+                        </p>
+                        <p class="text-xs italic text-yellow-100 mt-2">Landmark: Near by Singaravelan Nagar</p>
+                        <div class="flex gap-2 mt-4">
+                            <button onclick="copyAddress()" class="text-xs bg-yellow-900/50 px-3 py-2 rounded border border-yellow-600 hover:bg-yellow-700 transition-colors">
+                                Copy Address
+                            </button>
+                            <a href="tel:9944728719" class="text-xs bg-green-900/50 px-3 py-2 rounded border border-green-600 hover:bg-green-700 transition-colors">
+                                Call: 99447 28719
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Family Nameplate -->
+            <div class="family-sign text-center">
+                <p class="text-xs uppercase tracking-widest opacity-70 mb-2">அன்புடன் அழைக்கும்</p>
+                <p class="text-xl font-bold text-white">M. ஆறுமுகம் & T. சஹானா</p>
+                <p class="text-md text-yellow-200">A. ஹிருத்வி & A. தான்வி</p>
+                <div class="mt-4 pt-2 border-t border-white/10 flex justify-around text-[10px] opacity-60">
+                    <span>மதுரை</span>
+                    <span>•</span>
+                    <span>பெரம்பலூர்</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Countdown -->
+    <footer class="mt-16 text-center w-full max-w-2xl animate__animated animate__fadeInUp">
+        <p class="mb-4 text-yellow-200 uppercase tracking-widest text-sm">விழா தொடங்க இன்னும்...</p>
+        <div id="countdown" class="grid grid-cols-4 gap-4 text-center">
+            <!-- Countdown values -->
+        </div>
+    </footer>
+
+    <div id="copy-toast" class="fixed bottom-8 bg-white text-black px-8 py-3 rounded-full font-bold opacity-0 transition-opacity duration-300 pointer-events-none z-50 shadow-2xl">
+        முகவரி நகலெடுக்கப்பட்டது! ✅
+    </div>
+
+    <script>
+        // Rose Petal Animation
+        const petalContainer = document.getElementById('petal-container');
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.innerHTML = '🌸';
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            petal.style.animationDuration = (Math.random() * 4 + 5) + 's';
+            petal.style.opacity = Math.random() * 0.7 + 0.3;
+            petalContainer.appendChild(petal);
+            setTimeout(() => petal.remove(), 8000);
+        }
+        setInterval(createPetal, 400);
+
+        // Countdown Logic
+        const targetDate = new Date('June 4, 2026 04:30:00').getTime();
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const gap = targetDate - now;
+            const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
+            
+            const d = Math.max(0, Math.floor(gap / day));
+            const h = Math.max(0, Math.floor((gap % day) / hour));
+            const m = Math.max(0, Math.floor((gap % hour) / minute));
+            const s = Math.max(0, Math.floor((gap % minute) / second));
+
+            document.getElementById('countdown').innerHTML = `
+                <div class="bg-black/40 p-4 rounded-xl border border-yellow-900/50">
+                    <span class="text-3xl font-bold gold-text">${d}</span>
+                    <p class="text-xs opacity-70">நாட்கள்</p>
+                </div>
+                <div class="bg-black/40 p-4 rounded-xl border border-yellow-900/50">
+                    <span class="text-3xl font-bold gold-text">${h}</span>
+                    <p class="text-xs opacity-70">மணி</p>
+                </div>
+                <div class="bg-black/40 p-4 rounded-xl border border-yellow-900/50">
+                    <span class="text-3xl font-bold gold-text">${m}</span>
+                    <p class="text-xs opacity-70">நிமிடம்</p>
+                </div>
+                <div class="bg-black/40 p-4 rounded-xl border border-yellow-900/50">
+                    <span class="text-3xl font-bold gold-text">${s}</span>
+                    <p class="text-xs opacity-70">நொடி</p>
+                </div>
+            `;
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Copy Address
+        function copyAddress() {
+            const text = "Sagana Grha, S.No: 129/13, Plot No: 37, Krishnan Nagar Part 3, Varatharajapuram, Chennai - 600 048. Landmark: Near by Singaravelan Nagar.";
+            const el = document.createElement('textarea');
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+
+            const toast = document.getElementById('copy-toast');
+            toast.style.opacity = '1';
+            setTimeout(() => toast.style.opacity = '0', 2000);
+        }
+
+        // Music Control
+        const musicToggle = document.getElementById('music-toggle');
+        const audio = document.getElementById('bg-music');
+        const musicIcon = document.getElementById('music-icon');
+        const soundWave = document.getElementById('sound-wave');
+        let isPlaying = false;
+
+        musicToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                musicIcon.innerText = '▶';
+                musicToggle.innerHTML = '<span id="music-icon">▶</span> பாடலைப் கேளுங்கள்';
+                soundWave.style.display = 'none';
+            } else {
+                audio.play().catch(e => {
+                    console.log("Audio play failed: ", e);
+                    // Note: Most browsers require user interaction before playing audio
+                });
+                musicIcon.innerText = '⏸';
+                musicToggle.innerHTML = '<span id="music-icon">⏸</span> பாடலை நிறுத்து';
+                soundWave.style.display = 'flex';
+            }
+            isPlaying = !isPlaying;
+        });
+    </script>
+</body>
+</html>
