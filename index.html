@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="ta" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +8,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Arima:wght@400;700&display=swap');
-        
+
         body {
             background-color: #1a1a1a;
             color: #f3e5ab;
             font-family: 'Arima', cursive, serif;
             overflow-x: hidden;
-            background: linear-gradient(rgba(26, 26, 26, 0.95), rgba(26, 26, 26, 0.95)), 
+            background: linear-gradient(rgba(26, 26, 26, 0.95), rgba(26, 26, 26, 0.95)),
                         url('https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&q=60&w=1200');
             background-size: cover;
             background-attachment: fixed;
@@ -55,7 +55,7 @@
             box-shadow: 0 0 40px rgba(191, 149, 63, 0.3);
             transition: transform 0.5s ease;
         }
-        
+
         .building-frame:hover {
             transform: scale(1.02);
         }
@@ -102,6 +102,21 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* Rainbow animated text for English title */
+        .rainbow-text {
+            background: linear-gradient(to right, #ff0080, #ff6600, #ffee00, #00cc44, #0088ff, #cc00ff, #ff0080);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            animation: rainbowTextFlow 3s linear infinite;
+            letter-spacing: 0.05em;
+        }
+        @keyframes rainbowTextFlow {
+            0%   { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
         /* Sound Wave Animation */
         .wave-container {
             display: none;
@@ -119,12 +134,43 @@
             0%, 100% { height: 5px; }
             50% { height: 25px; }
         }
+
+        /* Language Toggle */
+        .lang-btn {
+            background: transparent;
+            border: 1px solid rgba(191, 149, 63, 0.5);
+            color: #f3e5ab;
+            padding: 0.3rem 1rem;
+            cursor: pointer;
+            font-family: 'Arima', cursive, serif;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        .lang-btn:first-child { border-radius: 999px 0 0 999px; }
+        .lang-btn:last-child  { border-radius: 0 999px 999px 0; border-left: none; }
+        .lang-btn.active {
+            background: linear-gradient(45deg, #bf953f, #fcf6ba);
+            color: #2d1b0d;
+            font-weight: bold;
+            border-color: #fcf6ba;
+        }
+        .lang-btn:hover:not(.active) {
+            background: rgba(191, 149, 63, 0.15);
+        }
     </style>
 </head>
 <body class="flex flex-col items-center min-h-screen p-4 md:p-12">
 
     <!-- Background Petals -->
     <div id="petal-container"></div>
+
+    <!-- Language Toggle -->
+    <div class="flex justify-end w-full max-w-6xl mb-4">
+        <div class="flex">
+            <button class="lang-btn active" id="lang-ta" onclick="setLang('ta')">தமிழ்</button>
+            <button class="lang-btn" id="lang-en" onclick="setLang('en')">English</button>
+        </div>
+    </div>
 
     <!-- Header Section -->
     <header class="text-center mb-12 animate__animated animate__fadeInDown">
@@ -134,39 +180,52 @@
             <span class="text-3xl">🪔</span>
         </div>
         <div class="flex justify-center mb-4">
-            <h2 class="text-xl md:text-2xl opacity-90">இறை அருளால் நடைபெறும்</h2>
+            <h2 class="text-xl md:text-2xl opacity-90 lang-text" data-ta="இறை அருளால் நடைபெறும்" data-en="With the Blessings of God">இறை அருளால் நடைபெறும்</h2>
         </div>
-        <h1 class="text-5xl md:text-7xl gold-text mb-4">புதுமனை புகுவிழா</h1>
-        <p class="text-2xl md:text-3xl text-yellow-100 font-bold tracking-widest">“சஹானா இல்லம்”</p>
+        <h1 id="main-title" class="text-5xl md:text-7xl gold-text mb-4 lang-text" data-ta="புதுமனை புகுவிழா" data-en="HOUSEWARMING CEREMONY">புதுமனை புகுவிழா</h1>
+        <p class="text-2xl md:text-3xl text-yellow-100 font-bold tracking-widest lang-text" data-ta='"சஹானா இல்லம்"' data-en='"Sagana Graha"'>"சஹானா இல்லம்"</p>
     </header>
 
     <!-- Content Grid -->
     <main class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-        
+
         <!-- Building Photo Section -->
         <div class="space-y-8 animate__animated animate__fadeInLeft">
             <div class="building-frame rounded-lg overflow-hidden bg-black relative group">
-                <img id="building-photo" src="home.jpeg" 
+                <img id="building-photo" src="home.jpeg"
                      class="w-full h-auto object-cover" alt="Sagana Grha Building">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                    <p class="text-white font-bold text-xl">எங்கள் கனவு இல்லம்</p>
+                    <p class="text-white font-bold text-xl lang-text" data-ta="எங்கள் கனவு இல்லம்" data-en="Our Dream Home">எங்கள் கனவு இல்லம்</p>
                 </div>
             </div>
 
-            <!-- The Poem from the Card -->
+            <!-- Poem -->
             <div class="poem-box bg-black/40 p-6 rounded-r-xl">
                 <p class="text-lg">
-                    "ஒவ்வொரு கல்லும் ஒரு கதை சொல்லுகிறது..
+                    <span class="ta-text">"ஒவ்வொரு கல்லும் ஒரு கதை சொல்லுகிறது..
                       ஒவ்வொரு சுவரும் ஒரு கனவை எதிரொலிக்கிறது..
                       அன்பும் மகிழ்ச்சியும் நிரைந்த எங்கள் புதுமனை புகுவிழாவில்,
-     	  கலந்து கொண்டு சிறப்பித்து ஆசீர்வதிக்குமாறு 
-		  உங்களையும் உங்கள் குடும்பத்தினரையும் அன்புடன் அழைக்கிறோம்."
+     	  கலந்து கொண்டு சிறப்பித்து ஆசீர்வதிக்குமாறு
+		  உங்களையும் உங்கள் குடும்பத்தினரையும் அன்புடன் அழைக்கிறோம்."</span>
+                    <span class="en-text" style="display:none;">"Every stone tells a story..
+                      Every wall echoes a dream..
+                      In our new home filled with love and joy,
+                      we lovingly invite you and your family
+                      to join us, bless us, and grace our housewarming celebration."</span>
                 </p>
-                <p class="mt-4 text-sm opacity-80">குச்சியும் கனவும் சேர்த்துக் கூடு கட்டும் சிறுபறவைபோல்,
-												       உழைப்பும் அன்பும் சேர்ந்து உயிர் தங்கும் இல்லம் இது.
-												      செங்கல் பேசாது,சுவர் சிரிக்காது ஆனால் உள்ளிருக்கும் உறவு வீட்டுக்குயிர் அளிக்கும்
-											                பறவை சொல்லாது கற்பிக்கும் பாடம் இது — அன்பே வீடு, அமைதியே கூடு.</p>
-            </div>            
+                <p class="mt-4 text-sm opacity-80">
+                    <span class="ta-text">குச்சியும் கனவும் சேர்த்துக் கூடு கட்டும் சிறுபறவைபோல்,
+													       உழைப்பும் அன்பும் சேர்ந்து உயிர் தங்கும் இல்லம் இது.
+													      செங்கல் பேசாது, சுவர் சிரிக்காது — ஆனால் உள்ளிருக்கும் உறவு வீட்டுக்கு உயிர் அளிக்கும்.
+												                பறவை சொல்லாது கற்பிக்கும் பாடம் இது — அன்பே வீடு, அமைதியே கூடு.</span>
+                    <span class="en-text" style="display:none;">Like a little bird that weaves twigs and dreams into a nest,
+                        this home was built with toil and love.
+                        Bricks do not speak, walls do not smile —
+                        yet the bonds within breathe life into a home.
+                        The bird teaches without words: Love is home, Peace is nest.</span>
+                </p>
+            </div>
+
             <div class="flex flex-col items-center gap-4">
                 <div id="sound-wave" class="wave-container">
                     <div class="wave-bar" style="animation-delay: 0.1s"></div>
@@ -176,10 +235,11 @@
                     <div class="wave-bar" style="animation-delay: 0.1s"></div>
                 </div>
                 <button id="music-toggle" class="button-gold px-10 py-4 rounded-full font-bold text-xl flex items-center gap-3">
-                    <span id="music-icon">▶</span> பாடலைப் கேளுங்கள்
+                    <span id="music-icon">▶</span>
+                    <span id="music-label" class="lang-text" data-ta="பாடலைப் கேளுங்கள்" data-en="Play Music">பாடலைப் கேளுங்கள்</span>
                 </button>
-                <p class="text-xs text-yellow-200/60 italic">Musical Invitation: சஹானா இல்லம்</p>
-                
+                <p class="text-xs text-yellow-200/60 italic lang-text" data-ta="Musical Invitation: சஹானா இல்லம்" data-en="Musical Invitation: Sagana Graha">Musical Invitation: சஹானா இல்லம்</p>
+
                 <audio id="bg-music" loop>
                     <source src="சஹானா_இல்லம்.mp3" type="audio/mpeg">
                 </audio>
@@ -189,24 +249,26 @@
         <!-- Invitation Details Section -->
         <div class="glass-panel p-8 md:p-12 space-y-8 animate__animated animate__fadeInRight">
             <div class="text-center">
-                <p class="text-yellow-100 mb-2">அன்பும் மகிழ்ச்சியும் நிறைந்த எங்கள் இல்ல விழாவில்...</p>
-                <h3 class="text-3xl gold-text mb-4">கிரகப்பிரவேச அழைப்பிதழ்</h3>
+                <p class="text-yellow-100 mb-2 lang-text" data-ta="அன்பும் மகிழ்ச்சியும் நிறைந்த எங்கள் இல்ல விழாவில்..." data-en="In our joyful housewarming celebration...">அன்பும் மகிழ்ச்சியும் நிறைந்த எங்கள் இல்ல விழாவில்...</p>
+                <h3 class="text-3xl gold-text mb-4 lang-text" data-ta="கிரகப்பிரவேச அழைப்பிதழ்" data-en="Housewarming Invitation">கிரகப்பிரவேச அழைப்பிதழ்</h3>
                 <div class="h-1 w-32 bg-gradient-to-r from-transparent via-[#bf953f] to-transparent mx-auto"></div>
             </div>
 
             <div class="grid grid-cols-1 gap-6 text-lg">
+                <!-- Date -->
                 <div class="flex items-center gap-6 bg-white/5 p-4 rounded-xl border border-white/10">
-                    <div class="flex-shrink-0 w-14 rounded-lg overflow-hidden text-center shadow-lg cal-rainbow" style="border: 1.5px solid transparent;">
+                    <div class="flex-shrink-0 w-14 rounded-lg overflow-hidden text-center shadow-lg" style="border: 1.5px solid transparent;">
                         <div class="text-xs font-bold py-1 uppercase tracking-widest" style="background: linear-gradient(135deg, #ff0080, #ff6600, #ffee00, #00cc44, #0088ff, #8800ff); background-size: 300% 300%; animation: rainbowShift 3s ease infinite; color: #fff;">JUN</div>
                         <div class="font-bold leading-none py-2" style="font-size: 2rem; background: #1a0533; color: #ffe066;">4</div>
                     </div>
                     <div>
                         <p class="font-bold text-2xl gold-text">04-06-2026</p>
-                        <p class="text-sm opacity-90 italic">பராபவ வருடம் வைகாசி மாதம் 21-ஆம் தேதி</p>
-                        <p class="text-sm opacity-70 italic font-bold">வியாழக்கிழமை (Thursday)</p>
+                        <p class="text-sm opacity-90 italic lang-text" data-ta="பராபவ வருடம் வைகாசி மாதம் 21-ஆம் தேதி" data-en="Parabava Year, Vaikasi Month, 21st Day">பராபவ வருடம் வைகாசி மாதம் 21-ஆம் தேதி</p>
+                        <p class="text-sm opacity-70 italic font-bold lang-text" data-ta="வியாழக்கிழமை (Thursday)" data-en="Thursday">வியாழக்கிழமை (Thursday)</p>
                     </div>
                 </div>
 
+                <!-- Time -->
                 <div class="flex items-center gap-6 bg-white/5 p-4 rounded-xl border border-white/10">
                     <div class="flex-shrink-0 flex justify-center items-center rounded-lg shadow-lg clock-rainbow" style="width: 3.5rem; height: 3.5rem;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -214,11 +276,12 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-bold text-2xl">காலை 4.30 - 6.00</p>
-                        <p class="text-sm opacity-90">நல்ல நேரம் (Auspicious Time)</p>
+                        <p class="font-bold text-2xl lang-text" data-ta="காலை 4.30 - 6.00" data-en="4:30 AM – 6:00 AM">காலை 4.30 - 6.00</p>
+                        <p class="text-sm opacity-90 lang-text" data-ta="நல்ல நேரம் (Auspicious Time)" data-en="Auspicious Time">நல்ல நேரம் (Auspicious Time)</p>
                     </div>
                 </div>
 
+                <!-- Address -->
                 <div class="flex items-start gap-6 bg-white/5 p-4 rounded-xl border border-white/10">
                     <div class="flex-shrink-0 flex justify-center items-center rounded-lg shadow-lg clock-rainbow" style="width: 3.5rem; height: 3.5rem;">
                         <span style="font-size: 2rem;">🏡</span>
@@ -230,10 +293,10 @@
                             Krishnan Nagar Part 3, Varatharajapuram,<br>
                             Chennai - 600 048.
                         </p>
-                        <p class="text-xs italic text-yellow-100 mt-2">Landmark: Near by Singaravelan Nagar</p>
+                        <p class="text-xs italic text-yellow-100 mt-2 lang-text" data-ta="அடையாளம்: சிங்காரவேலன் நகர் அருகில்" data-en="Landmark: Near Singaravelan Nagar">Landmark: Near by Singaravelan Nagar</p>
                         <div class="flex gap-2 mt-4 flex-wrap">
-                            <button onclick="copyAddress()" class="text-xs bg-yellow-900/50 px-3 py-2 rounded border border-yellow-600 hover:bg-yellow-700 transition-colors">
-                                Copy Address
+                            <button onclick="copyAddress()" class="text-xs bg-yellow-900/50 px-3 py-2 rounded border border-yellow-600 hover:bg-yellow-700 transition-colors lang-text" data-ta="முகவரி நகலெடு" data-en="Copy Address">
+                                முகவரி நகலெடு
                             </button>
                             <a href="tel:9944728719" class="text-xs bg-green-900/50 px-3 py-2 rounded border border-green-600 hover:bg-green-700 transition-colors flex items-center gap-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
@@ -249,28 +312,51 @@
 
             <!-- Family Nameplate -->
             <div class="family-sign text-center">
-                <p class="text-base uppercase tracking-widest opacity-90 mb-2">அன்புடன் அழைக்கும்</p>
-                <p class="text-xl font-bold text-white">M.ஆறுமுகம் & T.சஹானா</p>
-                <p class="text-md text-yellow-200">A.ஹிருத்வி & A.தாந்வி</p>
-                <div class="mt-4 pt-2 border-t border-white/10 flex justify-around text-[10px] opacity-60">                    
-                </div>
+                <p class="text-base uppercase tracking-widest opacity-90 mb-2 lang-text" data-ta="அன்புடன் அழைக்கும்" data-en="Inviting With Love">அன்புடன் அழைக்கும்</p>
+                <p class="text-xl font-bold text-white">
+                    <span class="ta-text">M.ஆறுமுகம் & T.சஹானா</span>
+                    <span class="en-text" style="display:none;">M. Arumugam &amp; T. Sagana</span>
+                </p>
+                <p class="text-md text-yellow-200">
+                    <span class="ta-text">A.ஹிருத்வி & A.தாந்வி</span>
+                    <span class="en-text" style="display:none;">A. Hrithvi &amp; A. Taanvi</span>
+                </p>
+                <div class="mt-4 pt-2 border-t border-white/10 flex justify-around text-[10px] opacity-60"></div>
             </div>
         </div>
     </main>
 
     <!-- Footer Countdown -->
     <footer class="mt-16 text-center w-full max-w-2xl animate__animated animate__fadeInUp">
-        <p class="mb-4 text-yellow-200 uppercase tracking-widest text-sm">விழா தொடங்க இன்னும்...</p>
-        <div id="countdown" class="grid grid-cols-4 gap-4 text-center">
-            <!-- Countdown values -->
-        </div>
+        <p id="countdown-label" class="mb-4 text-yellow-200 uppercase tracking-widest text-sm lang-text" data-ta="விழா தொடங்க இன்னும்..." data-en="Countdown to the Celebration...">விழா தொடங்க இன்னும்...</p>
+        <div id="countdown" class="grid grid-cols-4 gap-4 text-center"></div>
     </footer>
 
     <div id="copy-toast" class="fixed bottom-8 bg-white text-black px-8 py-3 rounded-full font-bold opacity-0 transition-opacity duration-300 pointer-events-none z-50 shadow-2xl">
-        முகவரி நகலெடுக்கப்பட்டது! ✅
+        <span class="ta-text">முகவரி நகலெடுக்கப்பட்டது! ✅</span>
+        <span class="en-text" style="display:none;">Address Copied! ✅</span>
     </div>
 
     <script>
+        // Language
+        let currentLang = 'ta';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.getElementById('html-root').lang = lang;
+            document.querySelectorAll('.lang-text').forEach(el => {
+                if (el.dataset[lang]) el.textContent = el.dataset[lang];
+            });
+            document.querySelectorAll('.ta-text').forEach(el => el.style.display = lang === 'ta' ? '' : 'none');
+            document.querySelectorAll('.en-text').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+            document.getElementById('lang-ta').classList.toggle('active', lang === 'ta');
+            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+            const title = document.getElementById('main-title');
+            title.classList.toggle('gold-text', lang === 'ta');
+            title.classList.toggle('rainbow-text', lang === 'en');
+            updateCountdown();
+        }
+
         // Rose Petal Animation
         const petalContainer = document.getElementById('petal-container');
         function createPetal() {
@@ -288,32 +374,35 @@
 
         // Countdown Logic
         const targetDate = new Date('June 4, 2026 04:30:00').getTime();
+        const countdownLabels = {
+            ta: ['நாட்கள்', 'மணி', 'நிமிடம்', 'நொடி'],
+            en: ['Days', 'Hours', 'Minutes', 'Seconds']
+        };
         function updateCountdown() {
             const now = new Date().getTime();
             const gap = targetDate - now;
             const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
-            
             const d = Math.max(0, Math.floor(gap / day));
             const h = Math.max(0, Math.floor((gap % day) / hour));
             const m = Math.max(0, Math.floor((gap % hour) / minute));
             const s = Math.max(0, Math.floor((gap % minute) / second));
-
+            const [lDay, lHr, lMin, lSec] = countdownLabels[currentLang];
             document.getElementById('countdown').innerHTML = `
                 <div class="bg-black/40 p-4 rounded-xl border border-yellow-900/50">
                     <span class="text-3xl font-bold gold-text">${d}</span>
-                    <p class="text-xs opacity-70">நாட்கள்</p>
+                    <p class="text-xs opacity-70">${lDay}</p>
                 </div>
                 <div class="bg-black/40 p-4 rounded-xl border border-yellow-900/50">
                     <span class="text-3xl font-bold gold-text">${h}</span>
-                    <p class="text-xs opacity-70">மணி</p>
+                    <p class="text-xs opacity-70">${lHr}</p>
                 </div>
                 <div class="bg-black/40 p-4 rounded-xl border border-yellow-900/50">
                     <span class="text-3xl font-bold gold-text">${m}</span>
-                    <p class="text-xs opacity-70">நிமிடம்</p>
+                    <p class="text-xs opacity-70">${lMin}</p>
                 </div>
                 <div class="bg-black/40 p-4 rounded-xl border border-yellow-900/50">
                     <span class="text-3xl font-bold gold-text">${s}</span>
-                    <p class="text-xs opacity-70">நொடி</p>
+                    <p class="text-xs opacity-70">${lSec}</p>
                 </div>
             `;
         }
@@ -329,7 +418,6 @@
             el.select();
             document.execCommand('copy');
             document.body.removeChild(el);
-
             const toast = document.getElementById('copy-toast');
             toast.style.opacity = '1';
             setTimeout(() => toast.style.opacity = '0', 2000);
@@ -339,22 +427,31 @@
         const musicToggle = document.getElementById('music-toggle');
         const audio = document.getElementById('bg-music');
         const musicIcon = document.getElementById('music-icon');
+        const musicLabel = document.getElementById('music-label');
         const soundWave = document.getElementById('sound-wave');
         let isPlaying = false;
+
+        const musicStrings = {
+            play: { ta: 'பாடலைப் கேளுங்கள்', en: 'Play Music' },
+            pause: { ta: 'பாடலை நிறுத்து', en: 'Pause Music' }
+        };
 
         musicToggle.addEventListener('click', () => {
             if (isPlaying) {
                 audio.pause();
                 musicIcon.innerText = '▶';
-                musicToggle.innerHTML = '<span id="music-icon">▶</span> பாடலைப் கேளுங்கள்';
+                const s = musicStrings.play;
+                musicLabel.textContent = s[currentLang];
+                musicLabel.dataset.ta = s.ta;
+                musicLabel.dataset.en = s.en;
                 soundWave.style.display = 'none';
             } else {
-                audio.play().catch(e => {
-                    console.log("Audio play failed: ", e);
-                    // Note: Most browsers require user interaction before playing audio
-                });
+                audio.play().catch(e => console.log("Audio play failed: ", e));
                 musicIcon.innerText = '⏸';
-                musicToggle.innerHTML = '<span id="music-icon">⏸</span> பாடலை நிறுத்து';
+                const s = musicStrings.pause;
+                musicLabel.textContent = s[currentLang];
+                musicLabel.dataset.ta = s.ta;
+                musicLabel.dataset.en = s.en;
                 soundWave.style.display = 'flex';
             }
             isPlaying = !isPlaying;
