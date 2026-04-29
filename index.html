@@ -89,6 +89,19 @@
             box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
         }
 
+        /* Rainbow Clock Icon */
+        .clock-rainbow {
+            background: linear-gradient(135deg, #ff0080, #ff6600, #ffee00, #00cc44, #0088ff, #8800ff);
+            background-size: 300% 300%;
+            animation: rainbowShift 3s ease infinite;
+            box-shadow: 0 0 16px rgba(255, 100, 180, 0.6);
+        }
+        @keyframes rainbowShift {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         /* Sound Wave Animation */
         .wave-container {
             display: none;
@@ -115,10 +128,13 @@
 
     <!-- Header Section -->
     <header class="text-center mb-12 animate__animated animate__fadeInDown">
-        <div class="flex justify-center gap-4 mb-4">
+        <div class="flex justify-center items-center gap-4 mb-4">
             <span class="text-3xl">🪔</span>
+            <img src="samy.png" alt="Ganesha" class="w-10 h-10 md:w-12 md:h-12 object-contain" style="mix-blend-mode: multiply; filter: brightness(1.1) contrast(1.1);">
+            <span class="text-3xl">🪔</span>
+        </div>
+        <div class="flex justify-center mb-4">
             <h2 class="text-xl md:text-2xl opacity-90">இறை அருளால் நடைபெறும்</h2>
-            <span class="text-3xl">🪔</span>
         </div>
         <h1 class="text-5xl md:text-7xl gold-text mb-4">புதுமனை புகுவிழா</h1>
         <p class="text-2xl md:text-3xl text-yellow-100 font-bold tracking-widest">“சஹானா இல்லம்”</p>
@@ -180,9 +196,9 @@
 
             <div class="grid grid-cols-1 gap-6 text-lg">
                 <div class="flex items-center gap-6 bg-white/5 p-4 rounded-xl border border-white/10">
-                    <div class="flex-shrink-0 w-14 rounded-lg overflow-hidden text-center shadow-lg" style="border: 1.5px solid #bf953f;">
-                        <div class="text-xs font-bold py-1 uppercase tracking-widest" style="background: linear-gradient(45deg, #bf953f, #fcf6ba); color: #2d1b0d;">JUN</div>
-                        <div class="font-bold leading-none py-2" style="font-size: 2rem; background: #2d1b0d; color: #fcf6ba;">4</div>
+                    <div class="flex-shrink-0 w-14 rounded-lg overflow-hidden text-center shadow-lg cal-rainbow" style="border: 1.5px solid transparent;">
+                        <div class="text-xs font-bold py-1 uppercase tracking-widest" style="background: linear-gradient(135deg, #ff0080, #ff6600, #ffee00, #00cc44, #0088ff, #8800ff); background-size: 300% 300%; animation: rainbowShift 3s ease infinite; color: #fff;">JUN</div>
+                        <div class="font-bold leading-none py-2" style="font-size: 2rem; background: #1a0533; color: #ffe066;">4</div>
                     </div>
                     <div>
                         <p class="font-bold text-2xl gold-text">04-06-2026</p>
@@ -192,9 +208,10 @@
                 </div>
 
                 <div class="flex items-center gap-6 bg-white/5 p-4 rounded-xl border border-white/10">
-                    <div class="flex-shrink-0 w-14 rounded-lg overflow-hidden text-center shadow-lg" style="border: 1.5px solid #bf953f;">
-                        <div class="text-xs font-bold py-1 uppercase tracking-widest" style="background: linear-gradient(45deg, #bf953f, #fcf6ba); color: #2d1b0d;">TIME</div>
-                        <div class="font-bold leading-none py-2" style="font-size: 0.85rem; background: #2d1b0d; color: #fcf6ba; line-height: 1.4;">4:30<br>– 6</div>
+                    <div class="flex-shrink-0 flex justify-center items-center rounded-lg shadow-lg clock-rainbow" style="width: 3.5rem; height: 3.5rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                        </svg>
                     </div>
                     <div>
                         <p class="font-bold text-2xl">காலை 4.30 - 6.00</p>
@@ -203,7 +220,9 @@
                 </div>
 
                 <div class="flex items-start gap-6 bg-white/5 p-4 rounded-xl border border-white/10">
-                    <span class="text-4xl">🏡</span>
+                    <div class="flex-shrink-0 flex justify-center items-center rounded-lg shadow-lg clock-rainbow" style="width: 3.5rem; height: 3.5rem;">
+                        <span style="font-size: 2rem;">🏡</span>
+                    </div>
                     <div class="flex-1">
                         <p class="font-bold text-xl gold-text uppercase">SAGANA GRHA</p>
                         <p class="text-base leading-relaxed opacity-90">
@@ -216,8 +235,9 @@
                             <button onclick="copyAddress()" class="text-xs bg-yellow-900/50 px-3 py-2 rounded border border-yellow-600 hover:bg-yellow-700 transition-colors">
                                 Copy Address
                             </button>
-                            <a href="tel:9944728719" class="text-xs bg-green-900/50 px-3 py-2 rounded border border-green-600 hover:bg-green-700 transition-colors">
-                                Call: 99447 28719
+                            <a href="tel:9944728719" class="text-xs bg-green-900/50 px-3 py-2 rounded border border-green-600 hover:bg-green-700 transition-colors flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
+                                99447 28719
                             </a>
                             <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x3a52f501f333eba9:0x62e867ed372835fc!11m1!4b1?entry=s&sa=X&ved=0CBEQ4kBqFwoTCJjFmOu0tosDFQAAAAAdAAAAABAF" target="_blank" rel="noopener noreferrer" class="text-xs bg-blue-900/50 px-3 py-2 rounded border border-blue-600 hover:bg-blue-700 transition-colors flex items-center gap-1">
                                 📍 Google Maps
